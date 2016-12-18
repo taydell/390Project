@@ -6,44 +6,48 @@ namespace Assets._Scripts
 {
     public class SpaceObject
     {
-        private int _xPosition;
-        private int _yPosition;
-        private int _zPosition;
+        private readonly int _xPosition;
+        private readonly int _zPosition;
+        private bool _isOcuppied;
+        private bool _isAvailable;
 
-        private bool _isOccupied;
+        public readonly bool isBlack;
 
-        public int GetXPosition()
-        {
+        public bool GetIsOcuppied() { 
+            return _isOcuppied;
+        }
+        public bool GetIsAvailable() { 
+            return _isAvailable;
+        }
+
+        public int GetXPosition(){
             return _xPosition;
         }
-        public void SetXPosition(int xPosition)
-        {
-            this._xPosition = xPosition;
-        }
-        public int GetYPosition()
-        {
-            return _yPosition;
-        }
-        public void SetYPosition(int yPosition)
-        {
-            this._yPosition = yPosition;
-        }
-        public int GetZPosition()
-        {
+
+        public int GetZPosition(){
             return _zPosition;
         }
-        public void SetZPosition(int zPosition)
+
+        public SpaceObject(int x, int z)
         {
-            this._zPosition = zPosition;
+            _xPosition = x;
+            _zPosition = z;
+            _isOcuppied = false;
+            _isAvailable = true;
+
+            isBlack = (x + z) % 2 == 0;
         }
 
-        public bool GetIsOccupied()
+        public void SetOccupied()
         {
-            return _isOccupied;
+            _isOcuppied = true;
+            _isAvailable = false;
         }
-        public void SetIsOccupied(bool isOccupied)
+
+        public void SetUnavailable()
         {
-            this._isOccupied = isOccupied;
+            _isAvailable = false;
         }
+
     }
 }

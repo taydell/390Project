@@ -5,104 +5,73 @@ using System.Collections.Generic;
 
 public class Createboard : MonoBehaviour
 {
-   
-    public List<SpaceObject> SpaceList = new List<SpaceObject>();
-    public List<QueenObject> QueenList = new List<QueenObject>();
+    public List<Row> board = new List<Row>();
     public Transform MyPrefabWhite;
-    public Transform MyPrefabBlack; 
+    public Transform MyPrefabBlack;
     public Transform QueenPrefab;
+    private GameObject ChessPieces;
+    private GameObject ChessBoard;
 
-    private int Size = 6;
+    private int _size = 6;
     
 	// Use this for initialization
 	void Awake() 
     {
-       
+        MakeParents();
+        MakeBoard();
         DrawBoard();
     }
 
+    void MakeBoard()
+    {
+        for (int i = 0; i < _size; i++)
+        {
+            board.Add(new Row(i, _size, QueenPrefab));
+        }
+    }
+
+
     void DrawBoard()
     {
-        int _count = 0;
-        
-        for (var z = 1; z <= Size; z++)
-        {
-            if (Size % 2 == 0)
-            {
-                _count = 0;
+        foreach(var row in board){
+            foreach(var space in row.GetSpaceObjects()){
+                if(space.isBlack)
+                {
+                    InstantiateSpace(MyPrefabBlack, space.GetXPosition(), space.GetZPosition());
+                }
+                else{
+                    InstantiateSpace(MyPrefabWhite, space.GetXPosition(), space.GetZPosition());
+                }
             }
-            for (var x = 1; x <= Size; x++)
-            {
-                if (Size%2 == 0)
-                {
-                    if (z % 2 == 0 && x==1)
-                    {
-                        _count = 1;
-                    }
-                    if (_count % 2 == 0)
-                    {
-                         InstantiateSpace(MyPrefabWhite, z, x);
-                    }
-                    else
-                    {
-                        InstantiateSpace(MyPrefabBlack, z, x);
-                    }
-                    _count++;
-                }
-                else
-                {
-                    if (_count % 2 == 0)
-                    {
-                        InstantiateSpace(MyPrefabWhite, z, x);
-                    }
-                    else
-                    {
-                       InstantiateSpace(MyPrefabBlack,z,x);  
-                    }
-                    _count++;
-                }
-                if (x == 1)
-                {
-                    InstantiateQueen(QueenPrefab, z, (x - 3), _count);
-                }
-            }    
         }
     }
 
     void InstantiateSpace(Transform prefab, int z, int x)
     {
-        Instantiate(prefab, new Vector3(x, 0, z), Quaternion.identity);
-        
-        SpaceObject space = new SpaceObject();
-        space.SetIsOccupied(false);
-        space.SetZPosition(z);
-        space.SetYPosition(0);
-        space.SetXPosition(x);
-        SpaceList.Add(space);
+        Transform ChessSpace = Instantiate(prefab, new Vector3(x, 0, z), Quaternion.identity) as Transform;
+
+        if(ChessSpace != null)
+            SetSpaceParent(ChessSpace);
     }
 
-    void InstantiateQueen(Transform prefab, int z, int x, int id)
+    void MakeParents()
     {
-        Instantiate(prefab, new Vector3(x, 0, z), Quaternion.identity);
+        ChessBoard = new GameObject();
+        ChessBoard.name = "ChessBoard";
 
-        QueenObject queen = new QueenObject();
-        queen.SetId(id);
-        queen.SetZPosition(z);
-        queen.SetYPosition(0);
-        queen.SetXPosition(x);
-        QueenList.Add(queen);
+        ChessPieces = new GameObject();
+        ChessPieces.name = "ChessPieces";
+    }
+
+    void SetSpaceParent(Transform ChessSpace)
+    {
+        ChessSpace.parent = ChessBoard.GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Start()
     {
-        int counter=0;
-        foreach (var space in SpaceList)
-        {
-            counter++;
-            Debug.Log("x: "+space.GetXPosition() +" z: " + space.GetZPosition());
-        }
-        Debug.Log("counter: " + counter);
+
     }
 
 	void Update () {
