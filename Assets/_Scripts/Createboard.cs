@@ -3,9 +3,9 @@ using System.Collections;
 using Assets._Scripts;
 using System.Collections.Generic;
 
-public class Createboard : MonoBehaviour
+public class CreateBoard : MonoBehaviour
 {
-    public List<Row> board = new List<Row>();
+    public static List<Row> board = new List<Row>();
     public Transform MyPrefabWhite;
     public Transform MyPrefabBlack;
     public Transform QueenPrefab;
