@@ -6,18 +6,12 @@ using UnityEngine.EventSystems;
 
 public class UIUtility : MonoBehaviour
 {
-    //Adds GameObject -> UI -> Dropdown menu item that instantiates
-    //a new button and attaches a dropdown component.
     [MenuItem("GameObject/UI/Dropdown")]
     public static void NewDropdown()
     {
-        // NOTE -- Unity has implemented its own Dropdown so I changed the name from "Dropdown" to "Simple Dropdown"
-        //NewButton("Dropdown", "Dropdown", GetCanvas().transform).gameObject.AddComponent<Dropdown>();
         NewButton("Simple Dropdown", "Simple Dropdown", GetCanvas().transform).gameObject.AddComponent<Dropdown>();
     }
 
-    //If unable to find a canvas in the scene, creates a new one.
-    //Also creates an event system if one is not found.
     public static Canvas GetCanvas()
     {
         Canvas c = FindObjectOfType<Canvas>();
@@ -40,7 +34,6 @@ public class UIUtility : MonoBehaviour
         return c;
     }
 
-    //Creates & initializes an empty recttransform inside the given parent.
     public static RectTransform NewUIElement(string name, Transform parent)
     {
         RectTransform temp = new GameObject().AddComponent<RectTransform>();
@@ -52,7 +45,6 @@ public class UIUtility : MonoBehaviour
         return temp;
     }
 
-    //Creates & initializes a new text element inside the given parent.
     public static Text NewText(string text, Transform parent)
     {
         RectTransform textRect = NewUIElement("Text", parent);
@@ -66,7 +58,6 @@ public class UIUtility : MonoBehaviour
         return t;
     }
 
-    //Creates & initializes a button(with a text child) inside of the given parent.
     public static Button NewButton(string name, string text, Transform parent)
     {
         RectTransform btnRect = NewUIElement(name, parent);
@@ -78,13 +69,10 @@ public class UIUtility : MonoBehaviour
         return btnRect.GetComponent<Button>();
     }
 
-    //Sets width and height with current anchors
     public static void ScaleRect(RectTransform r, float w, float h)
     {
-        //Setting size along horizontal axis (width)
         r.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, w);
 
-        //Setting size along vertical axis (height)
         r.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, h);
     }
 }

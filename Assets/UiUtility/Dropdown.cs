@@ -81,6 +81,7 @@ public class DropdownChild
         b.normalColor = parent.normal;
         b.highlightedColor = parent.highlighted;
         b.pressedColor = parent.pressed;
+        button.colors = b;
 
         button.onClick = childEvents;
 
