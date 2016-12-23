@@ -6,9 +6,9 @@ using System.Collections.Generic;
 public class Row : MonoBehaviour 
 {
     private List<SpaceObject> rows = new List<SpaceObject>();
-    private Transform _queen;
+    private static List<QueenObject> _queen = new List<QueenObject>();
     private GameObject chessPieces = GameObject.Find("ChessPieces");
-      
+     
     public Row(int rowNum, int size, Transform QueenPrefab)
     {   
         var row = new List<SpaceObject>();
@@ -26,10 +26,15 @@ public class Row : MonoBehaviour
         return rows;
     }
 
-    void InstantiateQueen( int rowNum, Transform QueenPrefab)
+    public static List<QueenObject> GetQueens()
     {
-        Transform chessPiece = (Instantiate(QueenPrefab, new Vector3(rowNum, 0, -2), Quaternion.identity)) as Transform;
-        _queen = QueenPrefab;
+        return _queen;
+    }
+
+    void InstantiateQueen( int rowNum, Transform queenPrefab)
+    {
+        Transform chessPiece = (Instantiate(queenPrefab, new Vector3(rowNum, 0, -2), Quaternion.identity)) as Transform;
+        _queen.Add(new QueenObject(queenPrefab,rowNum,-2));
         if (chessPieces != null)
             SetQueenParent(chessPiece);
     }

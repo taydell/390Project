@@ -5,15 +5,35 @@ namespace Assets._Scripts
 {
     public class QueenObject
     {
-        private readonly int _id;
+        private Transform _prefab;
+        private int _xPosition;
+        private int _zPosition;
 
-        public QueenObject(int id)
+        public QueenObject(Transform prefab, int xPosition, int zPosition)
         {
-            _id = id;
+            _prefab = prefab;
+            _xPosition = xPosition;
+            _zPosition = zPosition;
         }
-        public int GetId()
+
+        public int GetXPosition()
         {
-            return _id;
+            return _xPosition;
+        }
+
+        public int GetZPosition()
+        {
+            return _zPosition;
+        }
+
+        public Transform GetQueenPrefab()
+        {
+            return _prefab;
+        }
+
+        public void SetZPosition(int zPosition)
+        {
+            _zPosition = zPosition;
         }
     }
 }
