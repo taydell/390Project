@@ -34,7 +34,8 @@ public class Row : MonoBehaviour
     void InstantiateQueen( int rowNum, Transform queenPrefab)
     {
         Transform chessPiece = (Instantiate(queenPrefab, new Vector3(rowNum, 0, -2), Quaternion.identity)) as Transform;
-        _queen.Add(new QueenObject(queenPrefab,rowNum,-2));
+        _queen.Add(new QueenObject(queenPrefab, new Vector3(rowNum, 0, -2)));
+
         if (chessPieces != null)
             SetQueenParent(chessPiece);
     }

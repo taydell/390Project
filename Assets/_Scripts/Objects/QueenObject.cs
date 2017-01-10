@@ -6,34 +6,23 @@ namespace Assets._Scripts
     public class QueenObject
     {
         private Transform _prefab;
-        private int _xPosition;
-        private int _zPosition;
+        private Vector3 _position;
 
-        public QueenObject(Transform prefab, int xPosition, int zPosition)
+        public QueenObject(Transform prefab, Vector3 position)
         {
             _prefab = prefab;
-            _xPosition = xPosition;
-            _zPosition = zPosition;
+            _position = position;
+            new MoveQueen(_position);
         }
 
-        public int GetXPosition()
+        public Vector3 GetPosition()
         {
-            return _xPosition;
-        }
-
-        public int GetZPosition()
-        {
-            return _zPosition;
+            return _position;
         }
 
         public Transform GetQueenPrefab()
         {
             return _prefab;
-        }
-
-        public void SetZPosition(int zPosition)
-        {
-            _zPosition = zPosition;
         }
     }
 }

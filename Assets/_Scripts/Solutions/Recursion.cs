@@ -24,13 +24,8 @@ public class Recursion : MonoBehaviour {
             foreach (var space in row.GetSpaceObjects())
             {
                 foreach (var queen in _queens) {
-                    if (space.GetXPosition() == 0 && queen.GetXPosition() == 0)
-                    {
 
-                        _queens[space.GetXPosition()].SetZPosition(0);
-                        moved = true;
-                    }
-                    //Debug.Log(space.GetXPosition());
+                    Debug.Log(queen.GetPosition());
                 }
             }
         };
