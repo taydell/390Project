@@ -41,14 +41,15 @@ public class Recursion : MonoBehaviour {
     {
         if (moved)
         {
-            _queens[0].GetQueenPrefab().Translate(new Vector3(0,0,0));
+            _queens[0].GetQueenPrefab().localPosition = new Vector3(0,0,0);
             moved = false;
+
         }
     }
 
     void Update()
     {
-       
+        moveQueen();
     }
 
 
