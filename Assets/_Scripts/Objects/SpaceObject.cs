@@ -44,9 +44,19 @@ namespace Assets._Scripts
             _isAvailable = false;
         }
 
+        public void SetUnoccupied()
+        {
+            _isOcuppied = false;
+        }
+
         public void SetUnavailable()
         {
             _isAvailable = false;
+        }
+
+        public void SetAvailable()
+        {
+            _isAvailable = true;
         }
 
     }

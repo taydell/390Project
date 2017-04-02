@@ -5,7 +5,7 @@ public class MoveQueen : MonoBehaviour
 {
     private bool _isMoved = false;
     private bool _isMovedToStart = false;
-    public Vector3 _startPosition;
+    private Vector3 _startPosition;
     private Vector3 _movedPosition;
 
     public MoveQueen( Vector3 startPosition)
@@ -53,4 +53,8 @@ public class MoveQueen : MonoBehaviour
 
         }
 	}
+
+    public Vector3 GetPosition(){
+        return _startPosition;
+    }
 }

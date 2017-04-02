@@ -7,12 +7,14 @@ namespace Assets._Scripts
     {
         private Transform _prefab;
         private Vector3 _position;
+        public MoveQueen _moveQueen;
 
         public QueenObject(Transform prefab, Vector3 position)
         {
             _prefab = prefab;
             _position = position;
-            new MoveQueen(_position);
+            _moveQueen = new MoveQueen(_position);
+            //_moveQueen._startPosition = _position;
         }
 
         public Vector3 GetPosition()
