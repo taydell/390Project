@@ -12,7 +12,7 @@ public class CreateBoard : MonoBehaviour
     private GameObject ChessPieces;
     private GameObject ChessBoard;
 
-    private int _size = 6;
+    private int _size = 4;
     
 	// Use this for initialization
 	void Awake() 

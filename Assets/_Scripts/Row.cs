@@ -5,9 +5,10 @@ using System.Collections.Generic;
 
 public class Row : MonoBehaviour 
 {
-    private List<SpaceObject> rows = new List<SpaceObject>();
+    public List<SpaceObject> rows = new List<SpaceObject>();
     public Transform rowQueen;
     private GameObject chessPieces = GameObject.Find("ChessPieces");
+    private bool hasQueen;
      
     public Row(int rowNum, int size, Transform QueenPrefab)
     {   
@@ -38,5 +39,15 @@ public class Row : MonoBehaviour
     void SetQueenParent(Transform chessPiece)
     {
         chessPiece.parent = chessPieces.GetComponent<Transform>();
+    }
+
+    public bool DoesRowHaveQueen()
+    {
+        return hasQueen;
+    }
+
+    public void setQueenToRow(bool status)
+    {
+        hasQueen = status;
     }
 }
