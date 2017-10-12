@@ -1,60 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MoveQueen : MonoBehaviour 
 {
-    private bool _isMoved = false;
-    private bool _isMovedToStart = false;
-    private Vector3 _startPosition;
-    private Vector3 _movedPosition;
+    private CoroutineQueue _coroutineQueue;
 
-    public MoveQueen( Vector3 startPosition)
+    public MoveQueen(MonoBehaviour coroutineOwner)
     {
-        _startPosition = startPosition;
+        _coroutineQueue = new CoroutineQueue(coroutineOwner);
+        _coroutineQueue.StartLoop();
     }
 
-    public void MoveQueenToStart()
+    public void Move(Queue<IEnumerator> queenQueue)
     {
-        _isMovedToStart = true;
-    }
-    private void MoveQueenToStartPosition()
-    {
-
-    }
-
-    public void MoveQueenToBoardPosition(Vector3 movedPosition)
-    {
-        _movedPosition = movedPosition;
-        _isMoved = true;
-    }
-
-    private void MoveQueenToNewPosition(Vector3 Position)
-    {
-
-    }
-
-	// Use this for initialization
-	void Start () 
-    {
-	    
-	}
-	
-	// Update is called once per frame
-	void Update () 
-    {
-        if(_isMovedToStart){
-            Debug.Log("start x: "+ _startPosition.x + " z: " + _startPosition.z);
-            _isMovedToStart = false;
-        }
-        else if (_isMoved)
+        while (queenQueue.Count > 0)
         {
-            Debug.Log("new position x: " + _movedPosition.x + " z: " + _movedPosition.z);
-            _isMoved = false;
-
+            IEnumerator queenPos = queenQueue.Dequeue();
+            _coroutineQueue.EnqueueAction(queenPos);
         }
-	}
+    }
 
-    public Vector3 GetPosition(){
-        return _startPosition;
+    public IEnumerator SetMoveCoroutine(Transform transform, Vector3 position, float timeToMove)
+    {
+        var currentPos = transform.position;
+        var t = 0f;
+        while (t < 1)
+        {
+            t += Time.deltaTime / timeToMove;
+            transform.position = Vector3.Lerp(currentPos, position, t);
+            yield return null;
+        }
     }
 }

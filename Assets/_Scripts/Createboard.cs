@@ -9,10 +9,11 @@ public class CreateBoard : MonoBehaviour
     public Transform MyPrefabWhite;
     public Transform MyPrefabBlack;
     public Transform QueenPrefab;
+    public static bool isSolved = false;
     private GameObject ChessPieces;
     private GameObject ChessBoard;
 
-    private int _size = 4;
+    private int _size = 8;
     
 	// Use this for initialization
 	void Awake() 
@@ -30,7 +31,6 @@ public class CreateBoard : MonoBehaviour
         }
     }
 
-
     void DrawBoard()
     {
         foreach(var row in board){
@@ -39,7 +39,8 @@ public class CreateBoard : MonoBehaviour
                 {
                     InstantiateSpace(MyPrefabBlack, space.GetXPosition(), space.GetZPosition());
                 }
-                else{
+                else
+                {
                     InstantiateSpace(MyPrefabWhite, space.GetXPosition(), space.GetZPosition());
                 }
             }
@@ -67,14 +68,4 @@ public class CreateBoard : MonoBehaviour
     {
         ChessSpace.parent = ChessBoard.GetComponent<Transform>();
     }
-
-    // Update is called once per frame
-    void Start()
-    {
-
-    }
-
-	void Update () {
-	
-	}
 }

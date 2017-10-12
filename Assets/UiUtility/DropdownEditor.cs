@@ -117,7 +117,7 @@ public class DropdownEditor : Editor
 
         if (currDropdown.container == null)
         {
-            if (currDropdown.transform.FindChild("Container") == null)
+            if (currDropdown.transform.Find("Container") == null)
             {
                 currDropdown.container = UIUtility.NewUIElement("Container", currDropdown.transform);
                 currDropdown.container.gameObject.AddComponent<VerticalLayoutGroup>();
@@ -126,17 +126,17 @@ public class DropdownEditor : Editor
                 currDropdown.container.anchorMax = new Vector2(1, 0);
             }
             else
-                currDropdown.container = currDropdown.transform.FindChild("Container").GetComponent<RectTransform>();
+                currDropdown.container = currDropdown.transform.Find("Container").GetComponent<RectTransform>();
         }
 
         if (currDropdown.mainText == null)
         {
-            if (currDropdown.transform.FindChild("Text") == null)
+            if (currDropdown.transform.Find("Text") == null)
             {
                 currDropdown.mainText = UIUtility.NewText("Dropdown", currDropdown.transform);
             }
             else
-                currDropdown.mainText = currDropdown.transform.FindChild("Text").GetComponent<Text>();
+                currDropdown.mainText = currDropdown.transform.Find("Text").GetComponent<Text>();
 
         }
     }
