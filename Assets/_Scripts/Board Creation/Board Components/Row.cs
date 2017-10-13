@@ -5,24 +5,24 @@ using System.Collections.Generic;
 
 public class Row : MonoBehaviour 
 {
-    public List<SpaceObject> rows = new List<SpaceObject>();
+    public List<Tile> rows = new List<Tile>();
     public Transform rowQueen;
     private GameObject chessPieces = GameObject.Find("ChessPieces");
     private bool hasQueen;
      
     public Row(int rowNum, int size, Transform QueenPrefab)
     {   
-        var row = new List<SpaceObject>();
+        var row = new List<Tile>();
 
         for (int i = 0; i < size; i++) 
         {
-            rows.Add(new SpaceObject(rowNum, i));
+            rows.Add(new Tile(rowNum, i));
         }
 
         InstantiateQueen(rowNum, QueenPrefab);
     }
 
-    public List<SpaceObject> GetSpaceObjects()
+    public List<Tile> GetSpaceObjects()
     {
         return rows;
     }

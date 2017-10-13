@@ -3,7 +3,7 @@ using Assets._Scripts;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Recursion : MonoBehaviour
+public class RecursiveSolution : MonoBehaviour
 {
 
     private List<Row> board;
@@ -12,6 +12,7 @@ public class Recursion : MonoBehaviour
     private int _size;
     private MoveQueen _moveQueen;
     private Vector3 startingPos;
+
 
     // Use this for initialization
     public void OnClick()

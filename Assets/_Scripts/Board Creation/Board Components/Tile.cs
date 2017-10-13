@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Assets._Scripts
 {
-    public class SpaceObject
+    public class Tile
     {
         private readonly int _xPosition;
         private readonly int _zPosition;
@@ -28,7 +28,7 @@ namespace Assets._Scripts
             return _zPosition;
         }
 
-        public SpaceObject(int x, int z)
+        public Tile(int x, int z)
         {
             _xPosition = x;
             _zPosition = z;

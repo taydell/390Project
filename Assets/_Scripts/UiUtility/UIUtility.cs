@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class UIUtility : MonoBehaviour
 {
+#if UNITY_EDITOR
     [MenuItem("GameObject/UI/Dropdown")]
     public static void NewDropdown()
     {
         NewButton("Simple Dropdown", "Simple Dropdown", GetCanvas().transform).gameObject.AddComponent<Dropdown>();
     }
-
+#endif
     public static Canvas GetCanvas()
     {
         Canvas c = FindObjectOfType<Canvas>();
