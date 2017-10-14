@@ -7,6 +7,7 @@ public class Row : MonoBehaviour
 {
     public List<Tile> rows = new List<Tile>();
     public Transform rowQueen;
+
     private GameObject chessPieces = GameObject.Find("ChessPieces");
     private bool hasQueen;
      

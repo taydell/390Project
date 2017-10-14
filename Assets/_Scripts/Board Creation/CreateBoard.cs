@@ -6,10 +6,10 @@ using System.Collections.Generic;
 public class CreateBoard : MonoBehaviour
 {
     public static List<Row> board = new List<Row>();
+    public static bool isSolved = false;
     public Transform MyPrefabWhite;
     public Transform MyPrefabBlack;
     public Transform QueenPrefab;
-    public static bool isSolved = false;
 
     private GameObject ChessPieces;
     private GameObject ChessBoard;

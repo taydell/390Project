@@ -31,7 +31,7 @@ public class RecursiveSolution : MonoBehaviour
         }
         else
         {
-
+            //Put pop up here saying its already running
         }
     }
 
@@ -57,7 +57,6 @@ public class RecursiveSolution : MonoBehaviour
                 {
                     positions[line] = pos;
                     queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(board[line].rowQueen, new Vector3(line, 0, pos)));
-
                     line++;
                     if (line == _size)
                     {
@@ -80,7 +79,6 @@ public class RecursiveSolution : MonoBehaviour
                 if (line == 0)
                 {
                     _moveQueen.Move(queenQueue);
-
                     isSolved = true;
                     Debug.Log("Over");
                     break;

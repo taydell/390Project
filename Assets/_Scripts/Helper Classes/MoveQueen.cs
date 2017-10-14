@@ -12,6 +12,7 @@ public class MoveQueen
         new ResetScene(coroutineOwner, _coroutineQueue);
         _coroutineQueue.StartLoop();
     }
+
     public MoveQueen(MonoBehaviour coroutineOwner, bool isReturnToStart)
     {
         _coroutineQueue = new CoroutineQueue(coroutineOwner);
@@ -33,8 +34,6 @@ public class MoveQueen
         var time = 0f;
         while (time < 1)
         {
-            Debug.Log("speed: " + GlobalVariables.queenSpeed);
-
             if (timeToMove == .5f)
             {
                 time += Time.deltaTime / (float)timeToMove;
