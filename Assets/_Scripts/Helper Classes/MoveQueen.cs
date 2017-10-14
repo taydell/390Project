@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MoveQueen : MonoBehaviour
+public class MoveQueen
 {
     private CoroutineQueue _coroutineQueue;
 
@@ -12,7 +12,11 @@ public class MoveQueen : MonoBehaviour
         new ResetScene(coroutineOwner, _coroutineQueue);
         _coroutineQueue.StartLoop();
     }
-    public MoveQueen() { }
+    public MoveQueen(MonoBehaviour coroutineOwner, bool isReturnToStart)
+    {
+        _coroutineQueue = new CoroutineQueue(coroutineOwner);
+        _coroutineQueue.StartLoop();
+    }
 
     public void Move(Queue<IEnumerator> queenQueue)
     {
@@ -23,13 +27,27 @@ public class MoveQueen : MonoBehaviour
         }
     }
 
-    public IEnumerator SetMoveCoroutine(Transform transform, Vector3 position, float timeToMove)
+    public IEnumerator SetMoveCoroutine(Transform transform, Vector3 position, float? timeToMove = null)
     {
         var currentPos = transform.position;
         var time = 0f;
         while (time < 1)
         {
-            time += Time.deltaTime / timeToMove;
+            Debug.Log("speed: " + GlobalVariables.queenSpeed);
+
+            if (timeToMove == .5f)
+            {
+                time += Time.deltaTime / (float)timeToMove;
+            }
+            else if (GlobalVariables.queenSpeed == 2 || GlobalVariables.queenSpeed == 0)
+            {
+                time = 0;
+            }
+            else
+            {
+                time += Time.deltaTime / GlobalVariables.queenSpeed;
+            }
+
             transform.position = Vector3.Lerp(currentPos, position, time);
             yield return null;
         }

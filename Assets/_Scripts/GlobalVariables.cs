@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalVariables : MonoBehaviour {
-
-	public static bool isCoroutineStopped = false;    
+public class GlobalVariables : MonoBehaviour
+{
+    public static MonoBehaviour algorythmRunning;
+    public static float queenSpeed = 1.9f;
 }

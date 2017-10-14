@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class RecursiveSolution : MonoBehaviour
 {
-
     private List<Row> board;
     private Queue<IEnumerator> queenQueue = new Queue<IEnumerator>();
     bool isSolved;
@@ -13,19 +12,26 @@ public class RecursiveSolution : MonoBehaviour
     private MoveQueen _moveQueen;
     private Vector3 startingPos;
 
-
     // Use this for initialization
     public void OnClick()
     {
-        board = CreateBoard.board;
-        isSolved = CreateBoard.isSolved;
-        _moveQueen = new MoveQueen(this);
-
-        if (!isSolved)
+        if (GlobalVariables.algorythmRunning == null)
         {
-            _size = board.Count;
+            GlobalVariables.algorythmRunning = this;
+            board = CreateBoard.board;
+            isSolved = CreateBoard.isSolved;
+            _moveQueen = new MoveQueen(this);
 
-            BruteForceSolution();
+            if (!isSolved)
+            {
+                _size = board.Count;
+
+                BruteForceSolution();
+            }
+        }
+        else
+        {
+
         }
     }
 
@@ -50,8 +56,7 @@ public class RecursiveSolution : MonoBehaviour
                 if (i == line && !finished)
                 {
                     positions[line] = pos;
-                    Debug.Log("Q: (" + line + "," + pos + ")");
-                    queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(board[line].rowQueen, new Vector3(line, 0, pos), 2.0f));
+                    queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(board[line].rowQueen, new Vector3(line, 0, pos)));
 
                     line++;
                     if (line == _size)
@@ -84,7 +89,7 @@ public class RecursiveSolution : MonoBehaviour
                 {
                     startingPos = new Vector3(line, 0, -2);
                     positions[line] = -1;
-                    queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(board[line].rowQueen, startingPos, 2.0f));
+                    queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(board[line].rowQueen, startingPos));
                     line--;
                 }
             }

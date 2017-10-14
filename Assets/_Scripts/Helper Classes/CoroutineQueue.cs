@@ -21,6 +21,7 @@ public class CoroutineQueue
     public void StopLoop()
     {
         m_Owner.StopCoroutine(m_InternalCoroutine);
+        actions.Clear();
         m_InternalCoroutine = null;
     }
 
