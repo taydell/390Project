@@ -25,9 +25,9 @@ public class CoroutineQueue
         m_InternalCoroutine = null;
     }
 
-    public void EnqueueAction(IEnumerator aAction)
+    public void EnqueueAction(IEnumerator action)
     {
-        actions.Enqueue(aAction);
+        actions.Enqueue(action);
     }
 
     private IEnumerator Process()

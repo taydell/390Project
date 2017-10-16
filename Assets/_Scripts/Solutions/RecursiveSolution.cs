@@ -7,7 +7,6 @@ public class RecursiveSolution : MonoBehaviour
 {
     private List<Row> board;
     private Queue<IEnumerator> queenQueue = new Queue<IEnumerator>();
-    bool isSolved;
     private int _size;
     private MoveQueen _moveQueen;
     private Vector3 startingPos;
@@ -19,10 +18,9 @@ public class RecursiveSolution : MonoBehaviour
         {
             GlobalVariables.algorythmRunning = this;
             board = CreateBoard.board;
-            isSolved = CreateBoard.isSolved;
             _moveQueen = new MoveQueen(this);
 
-            if (!isSolved)
+            if (!GlobalVariables.isSolved)
             {
                 _size = board.Count;
 
@@ -31,7 +29,7 @@ public class RecursiveSolution : MonoBehaviour
         }
         else
         {
-            //Put pop up here saying its already running
+            Noty.instance.Display("Warning!", "You Are already running that solution!", 3f);
         }
     }
 
@@ -56,7 +54,7 @@ public class RecursiveSolution : MonoBehaviour
                 if (i == line && !finished)
                 {
                     positions[line] = pos;
-                    queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(board[line].rowQueen, new Vector3(line, 0, pos)));
+                    queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(board[line].rowQueen, new Vector3(line, 0, pos),board.Count));
                     line++;
                     if (line == _size)
                     {
@@ -79,15 +77,14 @@ public class RecursiveSolution : MonoBehaviour
                 if (line == 0)
                 {
                     _moveQueen.Move(queenQueue);
-                    isSolved = true;
-                    Debug.Log("Over");
+                    GlobalVariables.isSolved = true;
                     break;
                 }
                 else
                 {
                     startingPos = new Vector3(line, 0, -2);
                     positions[line] = -1;
-                    queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(board[line].rowQueen, startingPos));
+                    queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(board[line].rowQueen, startingPos, board.Count));
                     line--;
                 }
             }

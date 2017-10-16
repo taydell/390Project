@@ -18,6 +18,7 @@ public class ResetScene : MonoBehaviour
 
     public void OnClick()
     {
+        
         if (m_Owner != null)
         {
             _queenQueue = new Queue<IEnumerator>();
@@ -27,12 +28,16 @@ public class ResetScene : MonoBehaviour
             m_Owner = null;
             GlobalVariables.algorythmRunning = null;
         }
+        else
+        {
+            Noty.instance.Display("Warning!", "You cannot reset if nothing is running!", 3f);
+        }
     }
 
     void ResetBoard(List<Row> board)
     {
         _coroutineQueue.StopLoop();
-        board.ForEach(row => _queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(row.rowQueen, new Vector3(row.rowQueen.position.x, 0, -2f), .5f)));
+        board.ForEach(row => _queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(row.rowQueen, new Vector3(row.rowQueen.position.x, 0, -2f),board.Count, .5f)));
         _moveQueen.Move(_queenQueue);
     }
 }

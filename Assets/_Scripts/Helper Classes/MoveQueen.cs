@@ -28,7 +28,7 @@ public class MoveQueen
         }
     }
 
-    public IEnumerator SetMoveCoroutine(Transform transform, Vector3 position, float? timeToMove = null)
+    public IEnumerator SetMoveCoroutine(Transform transform, Vector3 position,int boardSize, float? timeToMove = null)
     {
         var currentPos = transform.position;
         var time = 0f;
@@ -48,6 +48,12 @@ public class MoveQueen
             }
 
             transform.position = Vector3.Lerp(currentPos, position, time);
+
+            if (transform.position.z != -2 && transform.position.x == boardSize-1 && GlobalVariables.isSolved)
+            {
+                GlobalVariables.isSolved = false;
+                Noty.instance.Display("Congratulations!", "Your solution has finished!", 5f);
+            }
             yield return null;
         }
     }
