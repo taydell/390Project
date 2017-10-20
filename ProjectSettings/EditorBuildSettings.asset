@@ -6,5 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/main.unity
+    path: Assets/_Scenes/ProblemSelection.unity
+    guid: 790064be24380b7458b8e7da69cedb05
+  - enabled: 1
+    path: Assets/_Scenes/8Queens.unity
     guid: edb1ff515e7a01348a8961f5735d5c0e
+  - enabled: 1
+    path: Assets/_Scenes/TowersOfHanoi.unity
+    guid: e23e8b24901986744992d0e749247d17

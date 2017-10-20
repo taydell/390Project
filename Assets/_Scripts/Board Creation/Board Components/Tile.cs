@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-namespace Assets._Scripts
+﻿namespace Assets._Scripts
 {
     public class Tile
     {
