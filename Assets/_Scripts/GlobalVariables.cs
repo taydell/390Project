@@ -13,4 +13,8 @@ public class GlobalVariables : MonoBehaviour
     public static string towerDropDownName = "Towers Dropdown";
     public static string UIName = "UI";
     #endregion
+
+    #region towers
+    public static bool towerIsFinished = false;
+    #endregion
 }

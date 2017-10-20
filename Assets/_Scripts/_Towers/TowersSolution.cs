@@ -20,12 +20,24 @@ public class TowersSolution : MonoBehaviour
     
     public void OnClick()
     {
-        _move = new MoveQueen(this);
-        _disks = TowerPieceList.instance.SetUpPieces();
-        setInitialDiskHeightOnTowers();
-        TowersRecursion(_disks, _disks.Count, -3, 3, 0);
-        enqueueDisksToTowerQueue();
-        _move.Move(towerPieceQueue);
+        if (GlobalVariables.algorythmRunning == null)
+        {
+            GlobalVariables.algorythmRunning = this;
+            _move = new MoveQueen(this);
+            _disks = TowerPieceList.instance.SetUpPieces();
+            setInitialDiskHeightOnTowers();
+            if (!GlobalVariables.isSolved)
+            {
+                TowersRecursion(_disks, _disks.Count, -3, 3, 0);
+                GlobalVariables.isSolved = true;
+                enqueueDisksToTowerQueue();
+                _move.Move(towerPieceQueue);
+            }
+        }
+        else
+        {
+            Noty.instance.Display("Warning!", "You Are already running that solution!", 3f);
+        }
     }
 
     public void TowersRecursion(List<TowerPieces> pieces, int n, float from, float to, float other)
