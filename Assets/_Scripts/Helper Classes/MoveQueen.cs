@@ -79,6 +79,9 @@ public class MoveQueen
 
             transform.position = Vector3.Lerp(currentPos, position, time);
 
+            if (GlobalVariables.latDiskInQueue)
+                Noty.instance.Display("Congratulations!", "Your solution has finished!", 5f);
+            
             yield return null;
         }
     }

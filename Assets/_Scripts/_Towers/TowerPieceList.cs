@@ -21,12 +21,12 @@ public class TowerPieceList : MonoBehaviour
    public List<TowerPieces> SetUpPieces()
    {
         List<TowerPieces> towerPieces = new List<TowerPieces>();
-        TowerPieces pieceOne = new TowerPieces(1, .12f, prefabOne);
-        TowerPieces pieceTwo = new TowerPieces(2, .16f, prefabTwo);
-        TowerPieces pieceThree = new TowerPieces(3, .22f, prefabThree);
-        TowerPieces pieceFour = new TowerPieces(4, .29f, prefabFour);
-        TowerPieces pieceFive = new TowerPieces(5, .34f, prefabFive);
-        TowerPieces pieceSix = new TowerPieces(6, .6f, prefabSix);
+        TowerPieces pieceOne = new TowerPieces(1, DiskStartingPointEnum.diskOneStartingLocation, prefabOne);
+        TowerPieces pieceTwo = new TowerPieces(2, DiskStartingPointEnum.diskTwoStartingLocation, prefabTwo);
+        TowerPieces pieceThree = new TowerPieces(3, DiskStartingPointEnum.diskThreeStartingLocation, prefabThree);
+        TowerPieces pieceFour = new TowerPieces(4, DiskStartingPointEnum.diskFourStartingLocation, prefabFour);
+        TowerPieces pieceFive = new TowerPieces(5, DiskStartingPointEnum.diskFiveStartingLocation, prefabFive);
+        TowerPieces pieceSix = new TowerPieces(6, DiskStartingPointEnum.diskSixStartingLocation, prefabSix);
 
         towerPieces.Add(pieceOne);
         towerPieces.Add(pieceTwo);

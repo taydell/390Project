@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class ProblemSelector : MonoBehaviour {
 
@@ -35,6 +36,13 @@ public class ProblemSelector : MonoBehaviour {
         {
             SceneManager.LoadScene("TowersOfHanoi");
             UI.Find(GlobalVariables.towerDropDownName).gameObject.SetActive(true);
+        }
+        else if (button.name.Equals("return_to_selection"))
+        {
+            SceneManager.LoadScene("ProblemSelection");
+            UI.gameObject.SetActive(false);
+            UI.Find(GlobalVariables.towerDropDownName).gameObject.SetActive(false);
+            UI.Find(GlobalVariables.queenDropDownName).gameObject.SetActive(false);
         }
     }
 

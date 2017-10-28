@@ -29,7 +29,6 @@ public class TowersSolution : MonoBehaviour
             if (!GlobalVariables.isSolved)
             {
                 TowersRecursion(_disks, _disks.Count, -3, 3, 0);
-                GlobalVariables.isSolved = true;
                 enqueueDisksToTowerQueue();
                 _move.Move(towerPieceQueue);
             }

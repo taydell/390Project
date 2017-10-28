@@ -16,5 +16,6 @@ public class GlobalVariables : MonoBehaviour
 
     #region towers
     public static bool towerIsFinished = false;
+    public static bool latDiskInQueue = false;
     #endregion
 }

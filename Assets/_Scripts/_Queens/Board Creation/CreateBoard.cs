@@ -15,7 +15,12 @@ public class CreateBoard : MonoBehaviour
     private int _size = 8;
     
 	// Use this for initialization
-	void Awake() 
+	void Start() 
+    {
+        Create();
+    }
+
+    public void Create()
     {
         MakeParents();
         MakeBoard();

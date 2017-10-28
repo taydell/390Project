@@ -8,6 +8,7 @@ public class ResetScene : MonoBehaviour
     private MoveQueen _moveQueen;
     private Queue<IEnumerator> _queenQueue = new Queue<IEnumerator>();
     private List<TowerPieces> _disks;
+    private Queue<IEnumerator> _diskQueue = new Queue<IEnumerator>();
     private static MonoBehaviour m_Owner;
     private static CoroutineQueue _coroutineQueue;
     [SerializeField]
@@ -28,7 +29,11 @@ public class ResetScene : MonoBehaviour
             if (m_Owner == towerBase)
             {
                 _disks = TowerPieceList.instance.SetUpPieces();
+                _diskQueue = new Queue<IEnumerator>();
                 _moveQueen = new MoveQueen(this, true);
+                resetDisks(_disks);
+                m_Owner = null;
+                GlobalVariables.algorythmRunning = null;
             }
             else if(m_Owner == queenBase)
             {
@@ -38,8 +43,8 @@ public class ResetScene : MonoBehaviour
                 ResetBoard(board);
                 m_Owner = null;
                 GlobalVariables.algorythmRunning = null;
+                GlobalVariables.isSolved = false;
             }
-           
         }
         else
         {
@@ -50,12 +55,29 @@ public class ResetScene : MonoBehaviour
     void ResetBoard(List<Row> board)
     {
         _coroutineQueue.StopLoop();
-        board.ForEach(row => _queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(row.rowQueen, new Vector3(row.rowQueen.position.x, 0, -2f),board.Count, .5f)));
+        foreach (var row in board) {
+            if (row.rowQueen != null)
+                _queenQueue.Enqueue(_moveQueen.SetMoveCoroutine(row.rowQueen, new Vector3(row.rowQueen.position.x, 0, -2f), board.Count, .5f));
+        }
         _moveQueen.Move(_queenQueue);
     }
 
-    void resetDisks(List<TowerPieceList> disks)
+    void resetDisks(List<TowerPieces> disks)
     {
+        _coroutineQueue.StopLoop();
+        var yPos = 4f;
+        foreach(var disk in disks)
+        {
+            _diskQueue.Enqueue(_moveQueen.SetMoveCoroutine(disk._pieces, new Vector3(disk._pieces.position.x, yPos, 0), .5f));
+            _diskQueue.Enqueue(_moveQueen.SetMoveCoroutine(disk._pieces, new Vector3(-3, yPos, 0), .5f));
+            yPos -= .2f;
+        }
 
+        for(int i = disks.Count-1; i >= 0; i--)
+        {
+            _diskQueue.Enqueue(_moveQueen.SetMoveCoroutine(disks[i]._pieces, new Vector3(-3, DiskStartingPointEnum.GetDiskLocationByNumber(i+1), 0), .5f));
+        }
+
+        _moveQueen.Move(_diskQueue);
     }
 }
